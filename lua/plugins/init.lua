@@ -55,7 +55,6 @@ return {
     },
     -- TODO: Test these plugins:
     -- https://github.com/cagve/telescope-texsuite
-    -- https://github.com/jackMort/ChatGPT.nvim
     -- https://github.com/paopaol/telescope-git-diffs.nvim
     -- https://github.com/xiyaowong/telescope-emoji.nvim
     -- neoclip
