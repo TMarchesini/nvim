@@ -392,6 +392,7 @@ return {
             },
             args = { "--log-level", "DEBUG" }, --, "--quiet" },
             runner = "pytest",
+            python = "python",
             -- python = "~/mypython/bin/python",
           },
         },
