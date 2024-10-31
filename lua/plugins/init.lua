@@ -400,8 +400,12 @@ return {
     end,
     keys = {
       { "<leader>tn", mode = "n", "<cmd>lua require('neotest').run.run()<CR>", desc = "Run nearest test" },
-      -- TODO: fix this mapping
-      { "<leader>tf", mode = "n", "<cmd>lua require('neotest').run.run()<CR>", desc = "Run all tests in file" },
+      {
+        "<leader>tf",
+        mode = "n",
+        "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<CR>",
+        desc = "Run all tests in file",
+      },
       { "<leader>to", mode = "n", "<cmd>lua require('neotest').output.open()<CR>", desc = "Open test output" },
       { "<leader>ts", mode = "n", "<cmd>lua require('neotest').summary.toggle()<CR>", desc = "View test summary" },
     },
