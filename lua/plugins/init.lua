@@ -315,7 +315,7 @@ return {
   },
   ---------------------------------- Debugging -------------------------------------------
   --TODO: do more with debugging
-  { "epheien/termdbg" },
+  { "epheien/termdbg", cmd = "TermDebug" },
   {
     "mfussenegger/nvim-dap",
   },
