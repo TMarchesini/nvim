@@ -371,7 +371,7 @@ return {
     end,
   },
   ----------------------------------- Programming stuff -----------------------------------
-  -- TODO: make this one work under windows
+  -- TODO: get more out of this plugin
   {
     "nvim-neotest/neotest",
     ft = "python",
@@ -400,6 +400,7 @@ return {
     end,
     keys = {
       { "<leader>tn", mode = "n", "<cmd>lua require('neotest').run.run()<CR>", desc = "Run nearest test" },
+      -- TODO: fix this mapping
       { "<leader>tf", mode = "n", "<cmd>lua require('neotest').run.run()<CR>", desc = "Run all tests in file" },
       { "<leader>to", mode = "n", "<cmd>lua require('neotest').output.open()<CR>", desc = "Open test output" },
       { "<leader>ts", mode = "n", "<cmd>lua require('neotest').summary.toggle()<CR>", desc = "View test summary" },
