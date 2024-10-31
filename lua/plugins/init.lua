@@ -398,6 +398,12 @@ return {
         },
       }
     end,
+    keys = {
+      { "<leader>tn", mode = "n", "<cmd>lua require('neotest').run.run()<CR>", desc = "Run nearest test" },
+      { "<leader>tf", mode = "n", "<cmd>lua require('neotest').run.run()<CR>", desc = "Run all tests in file" },
+      { "<leader>to", mode = "n", "<cmd>lua require('neotest').output.open()<CR>", desc = "Open test output" },
+      { "<leader>ts", mode = "n", "<cmd>lua require('neotest').summary.toggle()<CR>", desc = "View test summary" },
+    },
   },
   {
     "nvimtools/none-ls.nvim",

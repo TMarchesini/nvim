@@ -36,13 +36,6 @@ map("n", "<leader>dpr", "<cmd>lua require('dap-python').test_method()<CR>", { de
 map("n", "]g", "<cmd>lua vim.diagnostic.goto_next()<CR>", { desc = "Go to next diagnostics" })
 map("n", "[g", "<cmd>lua vim.diagnostic.goto_prev()<CR>", { desc = "Go to previous diagnostics" })
 
-------------------------------------------- Neotest -------------------------------------------------
---TODO: more the mappings to keys argument
-map("n", "<leader>tn", "<cmd>lua require('neotest').run.run()<CR>", { desc = "Run nearest test" })
-map("n", "<leader>tf", "<cmd>lua require('neotest').run.run()<CR>", { desc = "Run all tests in file" })
-map("n", "<leader>to", "<cmd>lua require('neotest').output.open()<CR>", { desc = "Open test output" })
-map("n", "<leader>ts", "<cmd>lua require('neotest').summary.toggle()<CR>", { desc = "View test summary" })
-
 ------------------------------------------- Aerial -------------------------------------------------
 map("n", "<leader>a", "<cmd>AerialToggle!<CR>", { desc = "Aereal Toggle" })
 
