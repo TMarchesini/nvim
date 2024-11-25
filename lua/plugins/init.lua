@@ -51,6 +51,7 @@ return {
     "nvim-telescope/telescope.nvim",
     dependencies = {
       "nvim-telescope/telescope-fzy-native.nvim",
+      "nvim-telescope/telescope-symbols.nvim",
       "SalOrak/whaler",
     },
     -- TODO: Test these plugins:
@@ -66,7 +67,7 @@ return {
       local is_windows = vim.fn.has "win64" == 1 or vim.fn.has "win32" == 1 or vim.fn.has "win16" == 1
       local is_linux = vim.fn.has "unix" == 1
       -- And edit it as described here: https://nvchad.com/docs/config/plugins
-      conf.extensions_list = { "themes", "terms", "fzy_native", "whaler" }
+      conf.extensions_list = { "themes", "terms", "fzy_native", "whaler", "symbols" }
       conf.extensions.fzy_native = { override_generic_sorter = true, override_file_sorter = true }
       -- TODO: this doesn't seem to work properly as bot .git and .gitignore are ignored -> test this in Linux
       -- conf.defaults.file_ignore_patterns = { "^.git/*" }
@@ -95,6 +96,7 @@ return {
     keys = {
       { "<leader>fd", mode = "n", "<cmd>Telescope whaler<CR>", desc = "Whaler" },
       { "<leader>fr", mode = "n", "<cmd>Telescope resume<CR>", desc = "Resume last search" },
+      { "<leader>fs", mode = "n", "<cmd>Telescope symbols<CR>", desc = "Find symbol" },
     },
   },
   { "psliwka/vim-smoothie", event = "BufEnter" },
