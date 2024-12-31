@@ -265,7 +265,7 @@ return {
         -- vim.g.vimtex_compiler_progname = "nvr"
         -- vim.g.vimtex_view_method = "nvr"
         vim.g.vimtex_view_general_viewer = "SumatraPDF"
-        -- vim.g.vimtex_view_general_view = "C:/Users/ROB6027/AppData/Local/SumatraPDF/SumatraPDF.exe"
+        -- vim.g.vimtex_view_general_view = os.getenv "USERPROFILE" .. "\\AppData\\Local\\SumatraPDF\\SumatraPDF.exe"
         vim.g.vimtex_view_general_options = "-reuse-instance -forward-search @tex @line @pdf"
       elseif is_linux then
         vim.g.vimtex_view_general_viewer = "zathura"
