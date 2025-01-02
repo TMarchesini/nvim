@@ -33,11 +33,11 @@ return {
       -- https://www.reddit.com/r/neovim/comments/xqogsu/turning_off_treesitter_and_lsp_for_specific_files/
       -- dofile(vim.g.base46_cache .. "syntax")
       require("nvim-treesitter.configs").setup {
-        ensure_installed = { "html", "css", "bash", "python", "json", "lua", "vim", "yaml" },
+        ensure_installed = { "html", "css", "bash", "python", "json", "lua", "vim", "yaml", "latex" },
         autoinstall = true,
         highlight = {
           enable = true, -- false will disable the whole extension
-          disable = { "tex", "latex" }, -- list of language that will be disabled
+          -- disable = { "tex", "latex" }, -- list of language that will be disabled
           use_languagetree = true,
         },
         -- If you need to change the installation directory of the parsers (see -> Advanced Setup)
@@ -254,24 +254,46 @@ return {
   },
   ---------------------------------------- LateX ----------------------------------------
   -- TODO: make inverse search work?
-  {
-    "lervag/vimtex",
-    -- Lazy loading breaks inverse search: https://github.com/lervag/vimtex/issues/2763
-    lazy = false,
-    config = function()
-      local is_windows = vim.fn.has "win64" == 1 or vim.fn.has "win32" == 1 or vim.fn.has "win16" == 1
-      local is_linux = vim.fn.has "unix" == 1
-      if is_windows then
-        -- vim.g.vimtex_compiler_progname = "nvr"
-        -- vim.g.vimtex_view_method = "nvr"
-        vim.g.vimtex_view_general_viewer = "SumatraPDF"
-        -- vim.g.vimtex_view_general_view = os.getenv "USERPROFILE" .. "\\AppData\\Local\\SumatraPDF\\SumatraPDF.exe"
-        vim.g.vimtex_view_general_options = "-reuse-instance -forward-search @tex @line @pdf"
-      elseif is_linux then
-        vim.g.vimtex_view_general_viewer = "zathura"
-      end
-    end,
-  },
+  -- {
+  --   "lervag/vimtex",
+  --   -- Lazy loading breaks inverse search: https://github.com/lervag/vimtex/issues/2763
+  --   lazy = false,
+  --   config = function()
+  --     local is_windows = vim.fn.has "win64" == 1 or vim.fn.has "win32" == 1 or vim.fn.has "win16" == 1
+  --     local is_linux = vim.fn.has "unix" == 1
+  --     if is_windows then
+  --       -- vim.g.vimtex_compiler_progname = "nvr"
+  --       -- vim.g.vimtex_view_method = "nvr"
+  --       vim.g.vimtex_view_general_viewer = "SumatraPDF"
+  --       -- vim.g.vimtex_view_general_view = os.getenv "USERPROFILE" .. "\\AppData\\Local\\SumatraPDF\\SumatraPDF.exe"
+  --       vim.g.vimtex_view_general_options = "-reuse-instance -forward-search @tex @line @pdf"
+  --     elseif is_linux then
+  --       vim.g.vimtex_view_general_viewer = "zathura"
+  --     end
+  --   end,
+  -- },
+  -- {
+  --   "f3fora/nvim-texlabconfig",
+  --   config = function()
+  --     local config = {
+  --       cache_activate = true,
+  --       cache_filetypes = { "tex", "bib" },
+  --       cache_root = vim.fn.stdpath "cache",
+  --       reverse_search_start_cmd = function()
+  --         return true
+  --       end,
+  --       reverse_search_edit_cmd = vim.cmd.edit,
+  --       reverse_search_end_cmd = function()
+  --         return true
+  --       end,
+  --       file_permission_mode = 438,
+  --     }
+  --     require("texlabconfig").setup(config)
+  --   end,
+  --   -- ft = { 'tex', 'bib' }, -- Lazy-load on filetype
+  --   build = "go build",
+  --   -- build = 'go build -o ~/.bin/' if e.g. ~/.bin/ is in $PATH
+  -- },
   ------------------------------ Source control ---------------------------------------
   {
     "NeogitOrg/neogit",

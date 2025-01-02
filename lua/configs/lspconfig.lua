@@ -314,7 +314,11 @@ lspconfig.texlab.setup {
   settings = {
     texlab = {
       diagnostics = { ignoredPatterns = { "Overfull \\[hv]box", "Unused label" } },
-      build = { timeout = 1000 },
+      build = { timeout = 3000 },
+      forwardSearch = {
+        executable = "SumatraPDF.exe",
+        args = { "-reuse-instance", "%p", "-forward-search", "%f", "%l" },
+      },
     },
   },
 }
