@@ -33,7 +33,7 @@ return {
       -- https://www.reddit.com/r/neovim/comments/xqogsu/turning_off_treesitter_and_lsp_for_specific_files/
       -- dofile(vim.g.base46_cache .. "syntax")
       require("nvim-treesitter.configs").setup {
-        ensure_installed = { "html", "css", "bash", "python", "json", "lua", "vim", "yaml", "latex" },
+        ensure_installed = { "html", "css", "bash", "python", "json", "lua", "vim", "yaml" },
         autoinstall = true,
         highlight = {
           enable = true, -- false will disable the whole extension
@@ -76,7 +76,11 @@ return {
       -- conf.defaults.hidden = true
       if is_windows then
         conf.extensions.whaler = {
-          directories = { os.getenv "USERPROFILE" .. "\\Repos" },
+          -- directories = { os.getenv "USERPROFILE" .. "\\Repos" },
+          directories = {
+            os.getenv "USERPROFILE" .. "\\Codebase",
+            os.getenv "USERPROFILE" .. "\\OneDrive - Robeco Nederland B.V\\Projects",
+          },
           oneoff_directories = { os.getenv "LOCALAPPDATA" .. "\\nvim" },
           file_explorer = "nvimtree",
           auto_file_explorer = false, -- Whether to automatically open file explorer. By default is `true`
