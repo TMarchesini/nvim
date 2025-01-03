@@ -11,6 +11,8 @@ map("n", ";", ":", { desc = "CMD enter command mode" })
 
 ---------------------------- CUSTOM MAPPINGS -------------------------------------------
 
+map("n", "<C-p>", "<cmd>Telescope find_files<CR>", { desc = "Telescope Find files" })
+
 ---------------------------------- DAP -------------------------------------------------
 map("n", "<leader>db", "<cmd> DapToggleBreakpoint <CR>", { desc = "Toggle breakpoint" })
 map("n", "<F5>", "<cmd> DapContinue <CR>", { desc = "Continue" })
