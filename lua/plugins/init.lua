@@ -73,6 +73,7 @@ return {
       -- conf.defaults.file_ignore_patterns = { "^.git/*" }
       -- conf.defaults.file_ignore_patterns = { "%.git/" }
       -- conf.defaults.file_ignore_patterns = { "^.git\\*" }
+      conf.defaults.file_ignore_patterns = { "*.__pycache__*" }
       -- conf.defaults.hidden = true
       if is_windows then
         conf.extensions.whaler = {
