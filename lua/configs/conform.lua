@@ -3,7 +3,7 @@ local options = {
     lua = { "stylua" },
     toml = { "taplo" },
     json = { "prettierd" },
-    yaml = { "prettierd" },
+    -- yaml = { "prettierd" },
     -- markdown = { "prettierd" },
     -- Note latexindent does not seem to work
     -- tex = { "latexindent" }, -- Maybe try llf instead
