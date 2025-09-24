@@ -65,6 +65,9 @@ local plugins = {
         dapui.close()
       end
 		end,
+    init = function()
+      require("core.utils").load_mappings "dap"
+    end,
   },
   {
     'rcarriga/nvim-dap-ui',
