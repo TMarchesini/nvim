@@ -265,6 +265,26 @@ M.nvimtree = {
   },
 }
 
+M.nvimdap = {
+  plugin = true,
+
+  n = {
+    -- Nvim DAP
+    ["<Leader>dl"] = {"<cmd>lua require'dap'.step_into()<CR>"},
+    ["<Leader>dl"] = {"<cmd>lua require'dap'.step_into()<CR>"},
+    ["<Leader>dj"] = {"<cmd>lua require'dap'.step_over()<CR>"},
+    ["<Leader>dk"] = {"<cmd>lua require'dap'.step_out()<CR>"},
+    ["<Leader>dc"] = {"<cmd>lua require'dap'.continue()<CR>"},
+    ["<Leader>db"] = {"<cmd>lua require'dap'.toggle_breakpoint()<CR>"},
+    ["<Leader>dd"] = {"<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>"},
+    ["<Leader>de"] = {"<cmd>lua require'dap'.terminate()<CR>"},
+    ["<Leader>dr"] = {"<cmd>lua require'dap'.run_last()<CR>"},
+
+  -- rustaceanvim
+    [ "<Leader>dt"] = { "<cmd>lua vim.cmd('RustLsp testables')<CR>"},
+	}
+}
+
 M.telescope = {
   plugin = true,
 
