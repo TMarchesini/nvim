@@ -31,3 +31,4 @@ vim.opt.relativenumber = true
 
 vim.lsp.enable("ts_ls")
 vim.lsp.enable("pyright")
+vim.lsp.enable("ruff")
