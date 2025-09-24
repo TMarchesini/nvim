@@ -19,3 +19,15 @@ end
 dofile(vim.g.base46_cache .. "defaults")
 vim.opt.rtp:prepend(lazypath)
 require "plugins"
+
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+  callback = function()
+    vim.highlight.on_yank({higroup="IncSearch", timeout=200})
+  end,
+})
+
+vim.opt.relativenumber = true
+
+vim.lsp.enable("ts_ls")
+vim.lsp.enable("pyright")
