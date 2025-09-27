@@ -12,6 +12,9 @@ vim.lsp.config('pyright', {
     settings = {
       pyright = {
         disableOrganizeImport = true,
+        exclude = { ".venv" },
+        venvPath = ".",
+        venv = ".venv",
       },
       python = {
         analysis = {
