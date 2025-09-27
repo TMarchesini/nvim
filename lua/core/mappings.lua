@@ -108,7 +108,7 @@ M.comment = {
 
   -- toggle comment in both modes
   n = {
-    ["<leader>/"] = {
+    ["<C-/>"] = {
       function()
         require("Comment.api").toggle.linewise.current()
       end,
@@ -117,8 +117,10 @@ M.comment = {
   },
 
   v = {
-    ["<leader>/"] = {
-      "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
+    ["<C-/>"] = {
+      function()
+        require('Comment.api').toggle.linewise(vim.fn.visualmode())
+      end,
       "Toggle comment",
     },
   },
@@ -481,6 +483,74 @@ M.gitsigns = {
         require("gitsigns").toggle_deleted()
       end,
       "Toggle deleted",
+    },
+  },
+}
+
+M.copilot = {
+  i = {
+    ["<C-l>"] = {
+      function()
+        vim.fn.feedkeys(vim.fn['copilot#Accept'](), '')
+      end,
+      "Copilot Accept",
+       {replace_keycodes = true, nowait=true, silent=true, expr=true, noremap=true}
+      }
+  }
+}
+
+M.copilotchat = {
+  plugin = true,
+
+  n = {
+    ["C-S-i"] = { "<cmd> CopilotChat <CR>" , "Open Copilot Chat" }
+  }
+  
+}
+  
+M.neotest = {
+  plugin = true,
+
+  n = {
+    ["<leader>tt"] = {
+      function()
+        require("neotest").run.run( {suite = true } )
+      end,
+      "Run nearest test",
+    },
+    ["<leader>tf"] = {
+      function()
+        require("neotest").run.run(vim.fn.expand("%"))
+      end,
+      "Run tests in file",
+    },
+
+    ["<leader>ts"] = {
+      function()
+        require("neotest").run.stop()
+      end,
+      "Stop test",
+    },
+
+    ["<leader>to"] = {
+      function()
+        require("neotest").output.open { enter = true }
+      end,
+      "Open test output",
+    },
+
+    ["<leader>tp"] = {
+      function()
+        require("neotest").output_panel.open { enter = true }
+      end,
+      "Open test output panel",
+    },
+
+    ["<leader>tS"] = {
+      function()
+        require("neotest").summary.toggle()
+      end,
+      "Toggle test summary",
     },
   },
 }

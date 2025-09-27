@@ -100,6 +100,44 @@ local plugins = {
     -- or run <leader>ch to see copilot mapping section
   end 
   },
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    dependencies = {
+      { "nvim-lua/plenary.nvim", branch = "master" },
+    },
+    build = "make tiktoken",
+    init = function()
+      require("core.utils").load_mappings "copilotchat"
+    end,
+  },
+  {
+    "nvim-neotest/neotest",
+    ft = {"python", "rust"},
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-neotest/neotest-python",
+      "rouge8/neotest-rust",
+      "nvim-neotest/nvim-nio",
+    },
+    config = function()
+      require("neotest").setup {
+        adapters = {
+          require("neotest-python") {
+            dap = { justMyCode = false },
+            runner = "pytest",
+          },
+          require("neotest-rust") {
+            args = { "--nocapture" },
+          },
+        },
+      }
+    end,
+    init = function()
+      require("core.utils").load_mappings "neotest"
+    end,
+  },
 }
 
 return plugins
