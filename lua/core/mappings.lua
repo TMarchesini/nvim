@@ -292,7 +292,7 @@ M.telescope = {
   n = {
     -- find
     ["<leader>ff"] = { "<cmd> Telescope find_files <CR>", "Find files" },
-    ["<C-p>"] = { "<cmd> Telescope find_files <CR>", "Find files" },
+    ["<C-p>"] = { "<cmd> Telescope oldfiles <CR>", "Find recent files" },
     ["<leader>fa"] = { "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>", "Find all" },
     ["<leader>fw"] = { "<cmd> Telescope live_grep <CR>", "Live grep" },
     ["<leader>fb"] = { "<cmd> Telescope buffers <CR>", "Find buffers" },
@@ -489,7 +489,7 @@ M.gitsigns = {
 
 M.copilot = {
   i = {
-    ["<C-l>"] = {
+    ["<C-y>"] = {
       function()
         vim.fn.feedkeys(vim.fn['copilot#Accept'](), '')
       end,
@@ -503,7 +503,7 @@ M.copilotchat = {
   plugin = true,
 
   n = {
-    ["C-S-i"] = { "<cmd> CopilotChat <CR>" , "Open Copilot Chat" }
+    ["<leader>ai"] = { "<cmd> CopilotChat <CR>" , "Open Copilot Chat" }
   }
   
 }

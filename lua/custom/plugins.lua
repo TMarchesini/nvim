@@ -102,10 +102,12 @@ local plugins = {
   },
   {
     "CopilotC-Nvim/CopilotChat.nvim",
-    dependencies = {
-      { "nvim-lua/plenary.nvim", branch = "master" },
-    },
+    lazy = false,
+    dependencies = { "nvim-lua/plenary.nvim" },
     build = "make tiktoken",
+    opts = {
+      model = "claude-opus-5",
+    },
     init = function()
       require("core.utils").load_mappings "copilotchat"
     end,
@@ -137,6 +139,11 @@ local plugins = {
     init = function()
       require("core.utils").load_mappings "neotest"
     end,
+  },
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    main = "render-markdown",
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
   },
 }
 
