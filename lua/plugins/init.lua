@@ -55,7 +55,7 @@ local default_plugins = {
 
   {
     "lukas-reineke/indent-blankline.nvim",
-    version = "2.20.7",
+    main = "ibl",
     event = "User FilePost",
     opts = function()
       return require("plugins.configs.others").blankline
@@ -63,21 +63,33 @@ local default_plugins = {
     config = function(_, opts)
       require("core.utils").load_mappings "blankline"
       dofile(vim.g.base46_cache .. "blankline")
-      require("indent_blankline").setup(opts)
+
+      local function link_ibl_hl()
+        vim.api.nvim_set_hl(0, "IblIndent", { link = "IndentBlanklineChar" })
+        vim.api.nvim_set_hl(0, "IblWhitespace", { link = "IndentBlanklineSpaceChar" })
+        vim.api.nvim_set_hl(0, "IblScope", { link = "IndentBlanklineContextChar" })
+      end
+      link_ibl_hl()
+      vim.api.nvim_create_autocmd("ColorScheme", {
+        callback = function()
+          dofile(vim.g.base46_cache .. "blankline")
+          link_ibl_hl()
+        end,
+      })
+
+      require("ibl").setup(opts)
     end,
   },
 
   {
     "nvim-treesitter/nvim-treesitter",
-    event = { "BufReadPost", "BufNewFile" },
-    cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
+    branch = "main",
+    lazy = false,
     build = ":TSUpdate",
-    opts = function()
-      return require "plugins.configs.treesitter"
-    end,
-    config = function(_, opts)
+    main = "nvim-treesitter",
+    config = function()
       dofile(vim.g.base46_cache .. "syntax")
-      require("nvim-treesitter.configs").setup(opts)
+      require "plugins.configs.treesitter"
     end,
   },
 

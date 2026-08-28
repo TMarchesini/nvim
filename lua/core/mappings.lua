@@ -132,6 +132,14 @@ M.lspconfig = {
   -- See `<cmd> :help vim.lsp.*` for documentation on any of the below functions
 
   n = {
+    ["<leader>ld"] = {
+      function()
+        local current = vim.diagnostic.is_enabled()
+        vim.diagnostic.enable(not current)
+      end,
+      "Toggle diagnostics",
+    },
+
     ["gD"] = {
       function()
         vim.lsp.buf.declaration()
@@ -292,13 +300,14 @@ M.telescope = {
   n = {
     -- find
     ["<leader>ff"] = { "<cmd> Telescope find_files <CR>", "Find files" },
-    ["<C-p>"] = { "<cmd> Telescope oldfiles <CR>", "Find recent files" },
     ["<leader>fa"] = { "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>", "Find all" },
     ["<leader>fw"] = { "<cmd> Telescope live_grep <CR>", "Live grep" },
     ["<leader>fb"] = { "<cmd> Telescope buffers <CR>", "Find buffers" },
     ["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "Help page" },
     ["<leader>fo"] = { "<cmd> Telescope oldfiles <CR>", "Find oldfiles" },
     ["<leader>fz"] = { "<cmd> Telescope current_buffer_fuzzy_find <CR>", "Find in current buffer" },
+    -- all files in cwd, ordered by frecency (most recently/frequently used first)
+    ["<C-p>"] = { "<cmd> Telescope frecency workspace=CWD <CR>", "Find files (recent first)" },
 
     -- git
     ["<leader>cm"] = { "<cmd> Telescope git_commits <CR>", "Git commits" },
@@ -407,13 +416,12 @@ M.blankline = {
   n = {
     ["<leader>cc"] = {
       function()
-        local ok, start = require("indent_blankline.utils").get_current_context(
-          vim.g.indent_blankline_context_patterns,
-          vim.g.indent_blankline_use_treesitter_scope
-        )
+        local bufnr = vim.api.nvim_get_current_buf()
+        local config = require("ibl.config").get_config(bufnr)
+        local scope = require("ibl.scope").get(bufnr, config)
 
-        if ok then
-          vim.api.nvim_win_set_cursor(vim.api.nvim_get_current_win(), { start, 0 })
+        if scope then
+          vim.api.nvim_win_set_cursor(vim.api.nvim_get_current_win(), { scope:start() + 1, 0 })
           vim.cmd [[normal! _]]
         end
       end,

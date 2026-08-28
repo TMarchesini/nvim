@@ -43,5 +43,5 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.opt.relativenumber = true
 
 vim.lsp.enable("ts_ls")
-vim.lsp.enable("pyright")
+vim.lsp.enable("ty")
 vim.lsp.enable("ruff")

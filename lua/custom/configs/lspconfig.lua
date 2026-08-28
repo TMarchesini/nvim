@@ -4,25 +4,11 @@ local on_attach = config.on_attach
 local capabilities = config.capabilities
 
 
-vim.lsp.config('pyright', {
+vim.lsp.config('ty', {
   on_attach = on_attach,
   capabilities = capabilities,
-  filetypes = {"python"},
-  init_options = {
-    settings = {
-      pyright = {
-        disableOrganizeImport = true,
-        exclude = { ".venv" },
-        venvPath = ".",
-        venv = ".venv",
-      },
-      python = {
-        analysis = {
-          ignore = { '*'}
-        }
-      }
-   }
-  }
+  cmd = { 'ty', 'server' },
+  filetypes = { 'python' },
 })
 
 vim.lsp.config('ruff', {
@@ -38,3 +24,5 @@ vim.lsp.config('ruff', {
   },
 }
 )
+
+vim.lsp.enable { "ty", "ruff" }

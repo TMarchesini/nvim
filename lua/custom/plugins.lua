@@ -1,5 +1,14 @@
 local plugins = {
   {
+    "nvim-telescope/telescope.nvim",
+    dependencies = { "nvim-telescope/telescope-frecency.nvim" },
+    opts = function()
+      local conf = require "plugins.configs.telescope"
+      table.insert(conf.extensions_list, "frecency")
+      return conf
+    end,
+  },
+  {
     "nvimtools/none-ls.nvim",
     ft = {"python"},
     opts = function()
@@ -10,9 +19,9 @@ local plugins = {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = {
-        "pyright",
+        -- "ty" installed via `uv tool install ty`, not Mason (needs python3 in PATH for pip installs)
+        "lua-language-server",
         "ruff",
-        "mypy",
         "typescript-language-server",
         "rust-analyzer",
         "codelldb",
@@ -21,6 +30,7 @@ local plugins = {
   },
   {
     "neovim/nvim-lspconfig",
+    lazy = false,
     config = function()
       require "plugins.configs.lspconfig"
       require "custom.configs.lspconfig"
@@ -30,35 +40,36 @@ local plugins = {
   {
     "mrcjkb/rustaceanvim",
     version = '^6',
-    lazy = false,
     ft = 'rust',
     dependencies = {"williamboman/mason.nvim"},
     init = function()
       require("core.utils").load_mappings "lspconfig"
     end,
     config = function()
-      local mason_registry = require('mason-registry')
-      local codelldb = mason_registry.get_package("codelldb")
-      local extension_path = vim.fn.expand("$MASON/packages/codelldb") .. "/extension/"
-      local codelldb_path = extension_path .. "adapter/codelldb"
-      local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
-      local cfg = require('rustaceanvim.config')
+      -- Deferred (function form) so it's evaluated lazily when rustaceanvim
+      -- actually needs it, avoiding a race with mason-registry's async init.
+      vim.g.rustaceanvim = function()
+        local extension_path = vim.fn.expand("$MASON/packages/codelldb") .. "/extension/"
+        local codelldb_path = extension_path .. "adapter/codelldb"
+        local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
+        local cfg = require('rustaceanvim.config')
 
-      vim.g.rustaceanvim = {
-       inlay_hints = {
-        enabled = true,
-        binding_mode = 'virtual_text', -- or 'prefix' or 'suffix'
-        type_hints = true,
-        parameter_hints = true,
-        chaining_hints = true,
-        closure_return_type_hints = true,
-        lifetime_hints = true,
-        -- etc. based on rust-analyzer's capabilities
-      },
-        dap = {
-          adapter = cfg.get_codelldb_adapter(codelldb_path, liblldb_path),
-        },
-      }
+        return {
+          inlay_hints = {
+            enabled = true,
+            binding_mode = 'virtual_text', -- or 'prefix' or 'suffix'
+            type_hints = true,
+            parameter_hints = true,
+            chaining_hints = true,
+            closure_return_type_hints = true,
+            lifetime_hints = true,
+            -- etc. based on rust-analyzer's capabilities
+          },
+          dap = {
+            adapter = cfg.get_codelldb_adapter(codelldb_path, liblldb_path),
+          },
+        }
+      end
     end,
   },
   {
@@ -102,7 +113,16 @@ local plugins = {
   },
   {
     "CopilotC-Nvim/CopilotChat.nvim",
-    lazy = false,
+    cmd = {
+      "CopilotChat",
+      "CopilotChatOpen",
+      "CopilotChatClose",
+      "CopilotChatToggle",
+      "CopilotChatStop",
+      "CopilotChatReset",
+      "CopilotChatSave",
+      "CopilotChatLoad",
+    },
     dependencies = { "nvim-lua/plenary.nvim" },
     build = "make tiktoken",
     opts = {
@@ -144,6 +164,26 @@ local plugins = {
     'MeanderingProgrammer/render-markdown.nvim',
     main = "render-markdown",
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
+  },
+  {
+    "iamcco/markdown-preview.nvim",
+    ft = { "markdown" },
+    cmd = { "MarkdownPreview", "MarkdownPreviewStop", "MarkdownPreviewToggle" },
+    build = function()
+      vim.fn["mkdp#util#install"]()
+    end,
+    init = function()
+      vim.g.mkdp_auto_close = 0
+      vim.g.mkdp_theme = "light"
+    end,
+    keys = {
+      {
+        "<leader>mp",
+        "<cmd>MarkdownPreviewToggle<cr>",
+        ft = "markdown",
+        desc = "Markdown preview toggle",
+      },
+    },
   },
 }
 
