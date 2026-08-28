@@ -37,6 +37,14 @@ local options = {
     border = {},
     borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
     color_devicons = true,
+    -- Show "filename  shortened/path/to/filename" instead of the full,
+    -- long path (which otherwise repeats the project folder on every line).
+    path_display = function(_, path)
+      local utils = require "telescope.utils"
+      local tail = utils.path_tail(path)
+      local shortened = utils.transform_path({ path_display = { "shorten" } }, path)
+      return string.format("%s  %s", tail, shortened)
+    end,
     set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
     file_previewer = require("telescope.previewers").vim_buffer_cat.new,
     grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
