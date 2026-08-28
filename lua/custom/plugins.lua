@@ -1,7 +1,7 @@
 local plugins = {
   {
     "nvim-telescope/telescope.nvim",
-    dependencies = { "nvim-telescope/telescope-frecency.nvim" },
+    dependencies = { { "nvim-telescope/telescope-frecency.nvim", version = "^1.0.0" } },
     opts = function()
       local conf = require "plugins.configs.telescope"
       table.insert(conf.extensions_list, "frecency")
