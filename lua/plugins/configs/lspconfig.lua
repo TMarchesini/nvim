@@ -1,20 +1,21 @@
 dofile(vim.g.base46_cache .. "lsp")
 
--- Inlined from NvChad's lua/nvchad/lsp.lua, but without the deprecated
--- vim.lsp.with() wrapper (see custom/init.lua for the border/winborder setup).
-local function lspSymbol(name, icon)
-  local hl = "DiagnosticSign" .. name
-  vim.fn.sign_define(hl, { text = icon, numhl = hl, texthl = hl })
-end
-
-lspSymbol("Error", "󰅙")
-lspSymbol("Info", "󰋼")
-lspSymbol("Hint", "󰌵")
-lspSymbol("Warn", "")
-
 vim.diagnostic.config {
   virtual_text = { prefix = "" },
-  signs = true,
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "󰅙",
+      [vim.diagnostic.severity.WARN] = "",
+      [vim.diagnostic.severity.INFO] = "󰋼",
+      [vim.diagnostic.severity.HINT] = "󰌵",
+    },
+    numhl = {
+      [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+      [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+      [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+      [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+    },
+  },
   underline = true,
   update_in_insert = false,
 }

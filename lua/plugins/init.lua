@@ -83,10 +83,9 @@ local default_plugins = {
 
   {
     "nvim-treesitter/nvim-treesitter",
-    branch = "main",
+    branch = "master",
     lazy = false,
     build = ":TSUpdate",
-    main = "nvim-treesitter",
     config = function()
       dofile(vim.g.base46_cache .. "syntax")
       require "plugins.configs.treesitter"
