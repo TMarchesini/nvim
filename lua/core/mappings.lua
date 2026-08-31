@@ -23,6 +23,12 @@ M.general = {
     ["<C-j>"] = { "<C-w>j", "Window down" },
     ["<C-k>"] = { "<C-w>k", "Window up" },
 
+    -- resize windows (repeatable, no need to re-press <C-w>)
+    ["<A-Up>"] = { "<cmd> resize +2 <CR>", "Increase window height" },
+    ["<A-Down>"] = { "<cmd> resize -2 <CR>", "Decrease window height" },
+    ["<A-Left>"] = { "<cmd> vertical resize -2 <CR>", "Decrease window width" },
+    ["<A-Right>"] = { "<cmd> vertical resize +2 <CR>", "Increase window width" },
+
     -- save
     ["<C-s>"] = { "<cmd> w <CR>", "Save file" },
 
@@ -291,6 +297,14 @@ M.dap = {
 
   -- rustaceanvim
     [ "<Leader>dt"] = { "<cmd> lua vim.cmd('RustLsp testables') <CR>"},
+
+    -- VSCode-style F-key bindings
+    ["<F5>"] = {"<cmd> lua require('dap').continue() <CR>"},
+    ["<S-F5>"] = {"<cmd> lua require('dap').terminate() <CR>"},
+    ["<F9>"] = {"<cmd> lua require('dap').toggle_breakpoint() <CR>"},
+    ["<F10>"] = {"<cmd> lua require('dap').step_over() <CR>"},
+    ["<F11>"] = {"<cmd> lua require('dap').step_into() <CR>"},
+    ["<S-F11>"] = {"<cmd> lua require('dap').step_out() <CR>"},
 	}
 }
 
