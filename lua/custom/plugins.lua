@@ -88,9 +88,31 @@ local plugins = {
       dap.listeners.before.event_exited.dapui_config = function()
         dapui.close()
       end
+
+      -- Brighter, higher-contrast sign colors for the gutter (defaults are
+      -- too dim to see against most colorschemes).
+      vim.api.nvim_set_hl(0, "DapBreakpoint", { fg = "#e51400" })
+      vim.api.nvim_set_hl(0, "DapBreakpointCondition", { fg = "#f79000" })
+      vim.api.nvim_set_hl(0, "DapLogPoint", { fg = "#61afef" })
+      vim.api.nvim_set_hl(0, "DapStopped", { fg = "#98c379" })
+      vim.api.nvim_set_hl(0, "DapStoppedLine", { bg = "#3c4841" })
+
+      vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DapBreakpoint", linehl = "", numhl = "DapBreakpoint" })
+      vim.fn.sign_define("DapBreakpointCondition", { text = "", texthl = "DapBreakpointCondition", linehl = "", numhl = "DapBreakpointCondition" })
+      vim.fn.sign_define("DapLogPoint", { text = "", texthl = "DapLogPoint", linehl = "", numhl = "DapLogPoint" })
+      vim.fn.sign_define("DapStopped", { text = "", texthl = "DapStopped", linehl = "DapStoppedLine", numhl = "DapStopped" })
+      vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "DapBreakpoint", linehl = "", numhl = "DapBreakpoint" })
 		end,
     init = function()
       require("core.utils").load_mappings "dap"
+    end,
+  },
+  {
+    "mfussenegger/nvim-dap-python",
+    ft = "python",
+    dependencies = { "mfussenegger/nvim-dap" },
+    config = function()
+      require("dap-python").setup(vim.fn.expand("~/.venvs/debugpy/bin/python"))
     end,
   },
   {

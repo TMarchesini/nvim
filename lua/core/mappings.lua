@@ -522,9 +522,15 @@ M.neotest = {
   n = {
     ["<leader>tt"] = {
       function()
-        require("neotest").run.run( {suite = true } )
+        require("neotest").run.run()
       end,
       "Run nearest test",
+    },
+    ["<leader>tA"] = {
+      function()
+        require("neotest").run.run { suite = true }
+      end,
+      "Run whole test suite",
     },
     ["<leader>tf"] = {
       function()
