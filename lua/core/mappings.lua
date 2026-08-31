@@ -401,6 +401,25 @@ M.nvterm = {
       end,
       "New vertical term",
     },
+
+    ["<leader>rp"] = {
+      function()
+        vim.cmd "write"
+        local nvterm_term = require "nvterm.terminal"
+        nvterm_term.send("python3 " .. vim.fn.expand "%", "horizontal")
+
+        local is_open = false
+        for _, t in ipairs(nvterm_term.list_terms() or {}) do
+          if t.type == "horizontal" and t.open then
+            is_open = true
+          end
+        end
+        if not is_open then
+          nvterm_term.show "horizontal"
+        end
+      end,
+      "Run python file",
+    },
   },
 }
 
